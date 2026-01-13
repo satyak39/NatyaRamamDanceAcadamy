@@ -1,2 +1,2 @@
-# NatyaRamamDanceAcadamyDemo
-NatyaRamamDanceAcadamyDemo
+# NatyaRamamDanceAcadamy
+Natya Ramam’s mission is to teach Kuchipudi,Bharatanatyam and Bollywood through a holistic, traditional, and appealing "Guru-Shishya Parampara"(Teacher-Disciple Tradition) for the upliftment of body, mind and soul. We seek to kindle in our dancers the joy of Bharatanatyam with Music and Yoga, and instill in them the values of dedication and commitment to the practice and performance of this exquisite art form.
