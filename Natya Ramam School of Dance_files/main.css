@@ -1862,9 +1862,12 @@
         }
 
     #nav ul li a {
-        display: block;
-        /* keep horizontal padding but align contents to the left so icon sits at left edge */
-        padding: 0.5em 1.5em 0.5em 1.5em;
+        /* use flex layout so icon and label are separate flex children and gap works */
+        display: flex;
+        align-items: center;
+        gap: 1rem; /* tab-space between icon and label */
+        /* keep horizontal padding (vertical padding preserved) */
+        padding: 0.5em 1.5em;
         text-align: left;
         color: rgba(255, 255, 255, 0.5);
         text-decoration: none;
@@ -1876,33 +1879,23 @@
         transition: none;
     }
 
-        #nav ul li a span {
-            position: relative;
+        /* label span no longer needs left padding (icon is a sibling now) */
+        #nav ul li a .label {
             display: inline-block;
             font-size: 0.95em;
-            /* reserve more space for the icon (pseudo-element) so label sits further right */
-            /* Option B: use rem values for precise control */
-            padding-left: 3.25rem; /* icon area (2rem) + extra gap */
+            vertical-align: middle;
+            padding-left: 0;
             line-height: 1.75em;
         }
 
-        /* stronger rule targeting the label specifically to ensure it sits beside the icon */
-        #nav ul li a .label {
+        /* icon is rendered via .icon:before (already defined). Make sure it vertically centers */
+        #nav ul li a .icon {
             display: inline-block;
-            padding-left: 0; /* already reserved on the span */
-            vertical-align: middle;
+            width: 2rem; /* reserve consistent icon column */
+            text-align: center;
+            line-height: 1.75em;
+            color: #41484c;
         }
-
-            #nav ul li a span:before {
-                position: absolute;
-                /* slightly inset the icon from the anchor edge */
-                left: 0.25rem;
-                color: #41484c;
-                text-align: center;
-                /* make the pseudo-element wider so icon is visually aligned with grid */
-                width: 2rem;
-                line-height: 1.75em;
-            }
 
         #nav ul li a.active {
             background: rgba(0, 0, 0, 0.15);
