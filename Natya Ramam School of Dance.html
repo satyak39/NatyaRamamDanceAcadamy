@@ -43,27 +43,12 @@
                                    <li><a href="http://foobar.tld" id="foobar-link" class="icon fa-whatever-icon-you-want"><span class="label">Foobar</span></a></li>
                             -->
                             <ul>
-                                <!-- 
-                                <li><a href="https://nrityopaasana.org/#top" id="top-link" class="skel-layers-ignoreHref active" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="icon fa-home">Home</span></a></li>
-                                <li><a href="https://nrityopaasana.org/#director" id="director-link" class="skel-layers-ignoreHref" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="icon fa-user">Artistic Director</span></a></li>
-                                <li><a href="https://nrityopaasana.org/#about" id="about-link" class="skel-layers-ignoreHref" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="icon fa-institution">About the School</span></a></li>
-                                <li><a href="https://nrityopaasana.org/#course" id="course-link" class="skel-layers-ignoreHref" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="icon fa-tasks">Course of Study</span></a></li>
-                                <li><a href="https://nrityopaasana.org/#portfolio" id="portfolio-link" class="skel-layers-ignoreHref" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="icon fa-th">Gallery</span></a></li>
-                                <li><a href="https://nrityopaasana.org/#contact" id="contact-link" class="skel-layers-ignoreHref" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="icon fa-envelope">Contact</span></a></li>
-                            -->
-
-                            <!-- <li><a href="#top" id="top-link" class="skel-layers-ignoreHref active" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="icon fa-home">Home</span></a></li> -->
-
-                            <li><a href="#top" id="top-link" class="skel-layers-ignoreHref active">
-                                <span class="icon fa-home"></span> Home
-                            </a></li>
-
-                            <li><a href="#director" id="director-link" class="skel-layers-ignoreHref" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="icon fa-user">Artistic Director</span></a></li>
-                            <li><a href="#about" id="about-link" class="skel-layers-ignoreHref" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="icon fa-institution">About the Academy</span></a></li>
-                            <li><a href="#course" id="course-link" class="skel-layers-ignoreHref" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="icon fa-tasks">Course of Study</span></a></li>
-                            <li><a href="#portfolio" id="portfolio-link" class="skel-layers-ignoreHref" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="icon fa-th">Gallery</span></a></li>
-                            <li><a href="#contact" id="contact-link" class="skel-layers-ignoreHref" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="icon fa-envelope">Contact</span></a></li>
-
+                                <li><a href="#top" id="top-link" class="skel-layers-ignoreHref active icon fa-home"><span class="label">Home</span></a></li>
+                                <li><a href="#director" id="director-link" class="skel-layers-ignoreHref icon fa-user"><span class="label">Artistic Director</span></a></li>
+                                <li><a href="#about" id="about-link" class="skel-layers-ignoreHref icon fa-institution"><span class="label">About the Academy</span></a></li>
+                                <li><a href="#course" id="course-link" class="skel-layers-ignoreHref icon fa-tasks"><span class="label">Course of Study</span></a></li>
+                                <li><a href="#portfolio" id="portfolio-link" class="skel-layers-ignoreHref icon fa-th"><span class="label">Gallery</span></a></li>
+                                <li><a href="#contact" id="contact-link" class="skel-layers-ignoreHref icon fa-envelope"><span class="label">Contact</span></a></li>
                             </ul>
                         </nav>
 
@@ -364,6 +349,37 @@
             <script src="./Natya Ramam School of Dance_files/util.js.download"></script>
             <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
             <script src="./Natya Ramam School of Dance_files/main.js.download"></script>
+            <!-- small script to ensure clicked nav item becomes active and to sync on scroll -->
+            <script>
+            (function(){
+                var links = document.querySelectorAll('#nav a[href^="#"]');
+                function clearActive(){ links.forEach(function(a){ a.classList.remove('active'); }); }
+                links.forEach(function(a){
+                    a.addEventListener('click', function(){
+                        clearActive();
+                        this.classList.add('active');
+                        // let the browser / scrolly plugin handle scrolling
+                    });
+                });
+
+                // Keep active link in sync while scrolling
+                var sections = Array.prototype.map.call(links, function(a){ return document.querySelector(a.getAttribute('href')); });
+                window.addEventListener('scroll', function(){
+                    var fromTop = window.scrollY + 120; // offset for header
+                    for(var i = sections.length - 1; i >= 0; i--){
+                        var s = sections[i];
+                        if(!s) continue;
+                        if(s.offsetTop <= fromTop){
+                            clearActive();
+                            var id = '#'+s.id;
+                            var link = document.querySelector('#nav a[href="'+id+'"]');
+                            if(link) link.classList.add('active');
+                            break;
+                        }
+                    }
+                });
+            })();
+            </script>
 
     
 
