@@ -215,7 +215,7 @@
                                 <a class="image featured"><img src="./Natya Ramam School of Dance_files/about_us.jpg" alt=""></a>
 
                                 <p>
-                                    <strong>Natya Ramam’s mission </strong> is to teach Kuchipudi,Bharatanatyam and Bollywood through a holistic, traditional, and appealing <strong>"Guru-Shishya Parampara"</strong>(Teacher-Disciple Tradition)  for the upliftment of body, mind and soul.  We seek to kindle in our dancers the joy of classical dance with Music and Yoga, and instill in them the values of dedication and commitment to the practice and performance of this exquisite art form.<br><br>
+                                     Rooted in the sacred <strong>Guru–Shishya Parampara,</strong> <strong>Natya Ramam’s mission </strong> is devoted to preserving and furthering the legacy of the Indian classical dance forms Kuchipudi & Bharatanatyam. Through holistic training in Kuchipudi, Bharatanatyam, and Bollywood, we seek to uplift the body, mind, and soul, awakening joy, devotion, and discipline through dance, music, and yoga.<br><br>
                                     <strong>Locations</strong>: Hindu Samaj Temple (Mahwah), Sri Guruvayurappan Temple (Marlboro), South Brunswick and Edison, NJ<br><br>
                                 </p>
 
@@ -354,71 +354,21 @@
                                 <b>E-Mail</b>: <a href="mailto:satyak39@gmail.com?subject=Enquiry">satyak39@gmail.com</a>
                             </p>
 
-                                <!-- Formspree endpoint (your new form) -->
-                                <form id="contact-form" method="post" action="https://formspree.io/f/mbddlqwq">
-                                 <div class="row">
-                                    <div class="6u 12u$(mobile)">
-                                        <label class="sr-only" for="name">Name</label>
-                                        <input id="name" name="name" type="text" placeholder="Name" required aria-required="true">
-                                    </div>
-                                    <div class="6u$ 12u$(mobile)">
-                                        <label class="sr-only" for="email">Your Email</label>
-                                        <input id="email" name="_replyto" type="email" placeholder="Your Email" required aria-required="true">
-                                    </div>
+                            <form method="post" action="https://formspree.io/NatyaRamam@gmail.com">
+                                <div class="row">
+                                    <div class="6u 12u$(mobile)"><input type="text" name="name" placeholder="Name"></div>
+                                    <div class="6u$ 12u$(mobile)"><input type="text" name="_replyto" placeholder="Your Email"></div>
                                     <input type="hidden" name="_subject" value="New submission!">
                                     <input type="text" name="_gotcha" style="display:none">
                                     <div class="12u$">
-                                        <label class="sr-only" for="message">Message</label>
-                                        <textarea id="message" name="message" placeholder="Message" required aria-required="true"></textarea>
+                                        <textarea name="message" placeholder="Message"></textarea>
                                     </div>
                                     <div class="12u$">
-                                        <button id="contact-submit" type="submit" class="button">Send Message</button>
-                                        <div id="contact-status" role="status" aria-live="polite" style="display:inline-block;margin-left:1rem;"></div>
+                                        <input type="submit" value="Send Message">
                                     </div>
                                 </div>
                             </form>
 
-                            <script>
-                            (function(){
-                                var form = document.getElementById('contact-form');
-                                var status = document.getElementById('contact-status');
-                                var submit = document.getElementById('contact-submit');
-
-                                if (!form) return;
-
-                                form.addEventListener('submit', function(e){
-                                    e.preventDefault();
-                                    submit.disabled = true;
-                                    status.textContent = 'Sending...';
-
-                                    fetch(form.action, {
-                                        method: form.method || 'POST',
-                                        body: new FormData(form),
-                                        headers: { 'Accept': 'application/json' }
-                                    }).then(function(response){
-                                        if (response.ok) {
-                                            status.textContent = 'Message sent. Thank you!';
-                                            form.reset();
-                                        } else if (response.status === 404) {
-                                            status.textContent = 'Form endpoint not found (404). Please configure your Formspree form and update the form action URL.';
-                                        } else if (response.status === 422) {
-                                            // validation error from Formspree
-                                            response.json().then(function(data){
-                                                status.textContent = (data && data.errors && data.errors.length) ? data.errors[0].message : 'Validation error. Please check your input.';
-                                            }).catch(function(){ status.textContent = 'Validation error. Please check your input.'; });
-                                        } else {
-                                            response.json().then(function(data){
-                                                status.textContent = (data && data.error) ? data.error : 'Error sending message.';
-                                            }).catch(function(){ status.textContent = 'Error sending message.'; });
-                                        }
-                                    }).catch(function(){
-                                        status.textContent = 'Network error. Please try again later.';
-                                    }).finally(function(){
-                                        submit.disabled = false;
-                                    });
-                                });
-                            })();
-                            </script>
                         </div>
                     </section>
 
