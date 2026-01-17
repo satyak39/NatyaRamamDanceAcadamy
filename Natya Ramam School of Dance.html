@@ -157,6 +157,32 @@
                         </div>
                     </section>
 
+                <!-- Video Gallery (separate section) -->
+                    <section id="videos" class="five">
+                        <div class="container">
+                            <header>
+                                <h2>Video Gallery</h2>
+                            </header>
+
+                            <div class="row gallery">
+                                <!-- YouTube sample item -->
+                                <div class="4u 12u$(mobile)">
+                                    <article class="item">
+                                        <a href="https://www.youtube.com/watch?v=QxunmyMQzNA"
+                                           class="youtube-link image fit from-left"
+                                           data-youtube="QxunmyMQzNA"
+                                           title="Natya Ramam - Sample Video">
+                                            <img src="https://img.youtube.com/vi/QxunmyMQzNA/hqdefault.jpg" alt="Video thumbnail">
+                                            <span class="play-overlay" aria-hidden="true">▶</span>
+                                        </a>
+                                    </article>
+                                </div>
+
+                                <!-- Add more video items here using same pattern -->
+                            </div>
+                        </div>
+                    </section>
+
                     <!-- Artistic director -->
                         <section id="director" class="two">
                             <div class="container">
@@ -327,7 +353,17 @@
                                     <article class="item">
                                         <a href="#" class="image fit from-left" style="outline: 0px;"><img src="./Natya Ramam School of Dance_files/imagesPY/G13.jpeg" title="" alt=""></a>
                                     </article>
-
+                                    <!-- YouTube video item -->
+                                    <article class="item" style="position:relative;">
+                                        <a href="https://www.youtube.com/watch?v=QxunmyMQzNA"
+                                           class="youtube-link image fit from-left"
+                                           data-youtube="QxunmyMQzNA"
+                                           title="Natya Ramam - Video">
+                                            <img src="https://img.youtube.com/vi/QxunmyMQzNA/hqdefault.jpg" alt="Video thumbnail">
+                                            <span class="play-overlay" aria-hidden="true"
+                                                  style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:3rem;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.6);">▶</span>
+                                        </a>
+                                    </article>
                                     <article class="item">
                                         <a href="#" class="image fit from-left" style="outline: 0px;"><img src="./Natya Ramam School of Dance_files/imagesPY/G14.jpeg" title="" alt=""></a>
                                     </article>
@@ -424,6 +460,92 @@
                         }
                     }
                 });
+            })();
+            </script>
+
+            <!-- YouTube video modal handler for the Video Gallery -->
+            <script>
+            (function(){
+                var links = document.querySelectorAll('a.youtube-link');
+                var overlay = document.querySelector('.poptrox-overlay');
+                if(!links.length || !overlay) return;
+                var popup = overlay.querySelector('.poptrox-popup');
+                var pic = popup.querySelector('.pic');
+                var closer = popup.querySelector('.closer');
+
+                function openVideo(id){
+                    if(!id) return;
+                    pic.innerHTML = '<iframe width="100%" height="480" src="https://www.youtube.com/embed/' + id + '?rel=0&autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+                    popup.style.display = 'block';
+                    closer.style.display = 'block';
+                    overlay.style.display = 'block';
+                }
+
+                function closeVideo(){
+                    overlay.style.display = 'none';
+                    popup.style.display = 'none';
+                    closer.style.display = 'none';
+                    pic.innerHTML = '';
+                }
+
+                links.forEach(function(a){
+                    a.addEventListener('click', function(e){
+                        e.preventDefault();
+                        var id = this.getAttribute('data-youtube') || (function(){
+                            var m = this.href.match(/[?&]v=([^&#]+)/); return m?m[1]:null;
+                        }).call(this);
+                        openVideo(id);
+                    });
+                });
+
+                overlay.addEventListener('click', function(e){ if(e.target === overlay) closeVideo(); });
+                closer.addEventListener('click', closeVideo);
+            })();
+            </script>
+
+            <!-- YouTube-in-modal handler: uses existing poptrox overlay in the page -->
+            <script>
+            (function(){
+                var links = document.querySelectorAll('a.youtube-link');
+                var overlay = document.querySelector('.poptrox-overlay');
+                if(!links.length || !overlay) return;
+                var popup = overlay.querySelector('.poptrox-popup');
+                var pic = popup.querySelector('.pic');
+                var closer = popup.querySelector('.closer');
+
+                function idFromUrl(url){
+                    var m = url.match(/[?&]v=([^&#]+)/);
+                    return m ? m[1] : null;
+                }
+
+                function openVideo(id){
+                    if(!id) return;
+                    pic.innerHTML = '<iframe width="100%" height="480" src="https://www.youtube.com/embed/' + id + '?rel=0&autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+                    popup.style.display = 'block';
+                    closer.style.display = 'block';
+                    overlay.style.display = 'block';
+                }
+
+                function closeVideo(){
+                    overlay.style.display = 'none';
+                    popup.style.display = 'none';
+                    closer.style.display = 'none';
+                    pic.innerHTML = '';
+                }
+
+                links.forEach(function(a){
+                    a.addEventListener('click', function(e){
+                        e.preventDefault();
+                        var id = this.getAttribute('data-youtube') || idFromUrl(this.href);
+                        openVideo(id);
+                    });
+                });
+
+                // Close when clicking backdrop or closer
+                overlay.addEventListener('click', function(e){
+                    if(e.target === overlay) closeVideo();
+                });
+                closer.addEventListener('click', closeVideo);
             })();
             </script>
 

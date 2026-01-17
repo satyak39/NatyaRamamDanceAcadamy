@@ -2153,6 +2153,30 @@ section.one { overflow: visible; }
     #director .image.featured img { max-height: none; }
 }
 
+/* Video gallery thumbnail play overlay */
+.youtube-link { position: relative; display: block; overflow: hidden; }
+.youtube-link img { display: block; width: 100%; height: auto; }
+.youtube-link .play-overlay {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    color: #fff;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+    pointer-events: none;
+}
+
+/* Slight darkening for thumbnails on hover */
+.youtube-link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.15);
+    transition: background 0.2s ease;
+}
+.youtube-link:hover::after { background: rgba(0,0,0,0.28); }
+
 /* Poptrox */
 
     .poptrox-popup {
