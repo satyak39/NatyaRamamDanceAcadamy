@@ -120,6 +120,14 @@
 
     }
 
+/* Ensure the top section can expand to include content below the hero (avoid clipping) */
+#main > section.one {
+    height: auto !important; /* allow the section to grow */
+    min-height: 60vh; /* keep a large hero area on first load */
+    overflow: visible !important; /* override earlier overflow:hidden */
+    padding-bottom: 2rem; /* breathing room under hero */
+}
+
     @media screen and (min-width: 961px) and (max-width: 1620px) {
 
         .container.\31 25\25 {
@@ -1979,7 +1987,7 @@
             }
 
             #main > section.one {
-                background-color: #cc6231;
+                background-color: #281b01;
                 /* background-color: #597772; */
             }
 
@@ -2042,13 +2050,27 @@
 /* semi-opaque panel for readability */
 .hero-overlay {
     position: absolute;
-    inset: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     display: flex;
-    align-items: center;
     justify-content: center;
-    background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.25));
-    padding: 1.5rem;
+    /* gradient fades upward so text is readable against the image */
+    background: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0));
+    padding: 1.25rem 1rem;
     text-align: center;
+}
+
+/* Shloka styling placed at the bottom of the hero */
+.hero-overlay #shloka-sanskrit {
+    margin: 0;
+    color: #fff;
+    font-family: 'Samarkan Normal', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.35em;
+    max-width: 900px;
+    width: min(94%, 900px);
 }
 
 .hero-img {
@@ -2058,6 +2080,29 @@
     object-fit: contain; /* show full image without cropping; change to 'cover' to fill */
     object-position: center center;
 }
+
+/* Place the shloka below the hero image (not overlayed) */
+.shloka-below {
+    display: flex;
+    justify-content: center;
+    padding: 1.25rem 1rem 3.25rem; /* extra bottom padding to avoid clipping */
+    text-align: center;
+    overflow: visible;
+}
+
+.shloka-below #shloka-sanskrit {
+    margin: 0;
+    color: #fff; /* section.one is dark; keep white for contrast */
+    font-family: 'Samarkan Normal', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.5em; /* slightly larger to prevent visual clipping */
+    max-width: 900px;
+    width: min(94%, 900px);
+}
+
+/* Ensure the top section allows visible content below the hero */
+section.one { overflow: visible; }
 
 /* title & sloka */
 .hero-title {
