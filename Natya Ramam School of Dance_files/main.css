@@ -1521,12 +1521,17 @@
         .image.avatar48 {
             width: 150px;
             height: 150px;
-            background: #f00;
+            background: transparent; /* remove debug color */
+            border-radius: 50%;
+            overflow: hidden;
+            display: inline-block;
         }
 
             .image.avatar48 img {
                 width: 150px;
                 height: 150px;
+                object-fit: cover;
+                display: block;
             }
 
         .image.fit {
@@ -1841,6 +1846,7 @@
         margin: 0.75em 1.5em 1.5em 1.5em;
         min-height: 48px;
         cursor: default;
+        text-align: center; /* center logo and text */
     }
 
         #logo h1 {
@@ -1863,9 +1869,11 @@
         }
 
         #logo .image {
-            /*position: absolute;*/
-            left: 0;
-            top: 0;
+            display: inline-block;
+            margin: 0 auto;
+            position: relative;
+            left: auto;
+            top: auto;
         }
 
     #nav ul li a {
