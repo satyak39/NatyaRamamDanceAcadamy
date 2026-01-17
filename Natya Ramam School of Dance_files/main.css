@@ -2128,6 +2128,31 @@ section.one { overflow: visible; }
     #shloka-sanskrit { font-size: 0.95rem; }
 }
 
+/* Allow featured images to show in specific sections (override the global hide) */
+#director .image.featured { display: block !important; }
+#director .image.featured img { display: block; max-width: 100%; height: auto; }
+
+/* Make director featured image centered, 90% width and limit height so description remains visible */
+#director .image.featured {
+    width: 90%;
+    max-width: 900px;
+    margin: 0 auto 1.25rem;
+    display: block !important;
+}
+
+#director .image.featured img {
+    width: 100%;
+    height: auto;
+    display: block;
+    max-height: 60vh; /* keeps image from taking entire viewport and allows description below */
+    object-fit: contain;
+}
+
+@media screen and (max-width: 640px) {
+    #director .image.featured { width: 100%; margin-bottom: 1rem; }
+    #director .image.featured img { max-height: none; }
+}
+
 /* Poptrox */
 
     .poptrox-popup {
