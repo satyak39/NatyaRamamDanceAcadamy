@@ -2382,7 +2382,7 @@ section.one { overflow: visible; }
 #header {
     width: var(--sidebar-width) !important;
     max-width: 375px !important;
-    min-width: 220px;
+       min-width: 220px;
     position: fixed !important;
     top: 0;
     left: 0;
@@ -2514,4 +2514,34 @@ h3 { font-size: clamp(1.05rem, 1.4vw, 1.3rem); }
 
 /* Ensure any remaining px/pt declarations don't force oversized text on small screens */
 * { -webkit-text-size-adjust: 100%; }
+
+/* Gallery improvements: spacing, hover zoom, caption overlay */
+.row.gallery { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+.row.gallery .item { width: calc(33.333% - 1rem); min-width: 180px; box-sizing: border-box; }
+.row.gallery .item .image { position: relative; display: block; border-radius: 8px; overflow: hidden; }
+.row.gallery .item img { display: block; width: 100%; height: 220px; object-fit: cover; transition: transform 0.35s ease; }
+.row.gallery .item:hover img { transform: scale(1.04); }
+.row.gallery .item .gallery-caption {
+     position: absolute;
+     left: 0;
+     right: 0;
+     bottom: 0;
+     padding: .5rem .75rem;
+     background: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0));
+     color: #fff;
+     font-size: 0.95rem;
+     text-align: left;
+     opacity: 1;
+ }
+ /* make gallery single-column on narrow screens */
+ @media (max-width: 960px) {
+     .row.gallery .item { width: calc(50% - 1rem); }
+     .row.gallery .item img { height: 160px; }
+ }
+ @media (max-width: 480px) {
+     .row.gallery .item { width: 100%; }
+     .row.gallery .item img { height: 220px; }
+ }
+ /* ensure poptrox popup content uses full width on mobile */
+ .poptrox-popup .pic { max-width: 92vw; max-height: 78vh; }
 
