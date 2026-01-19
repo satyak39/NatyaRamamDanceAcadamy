@@ -2545,3 +2545,8 @@ h3 { font-size: clamp(1.05rem, 1.4vw, 1.3rem); }
  /* ensure poptrox popup content uses full width on mobile */
  .poptrox-popup .pic { max-width: 92vw; max-height: 78vh; }
 
+/* ensure iframe videos in poptrox are responsive and don't break layout */
+.poptrox-popup .pic { display: block; padding: 0.5rem; box-sizing: border-box; }
+.poptrox-popup .pic iframe { width: 100%; height: 60vh; max-width: 1000px; border: 0; display: block; }
+.poptrox-popup .caption { display: block; }
+

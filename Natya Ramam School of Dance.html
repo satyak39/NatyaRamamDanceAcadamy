@@ -445,89 +445,80 @@
             })();
             </script>
 
-            <!-- YouTube video modal handler for the Video Gallery -->
+            <!-- unified lightbox (vanilla JS): images and YouTube videos open inside existing poptrox overlay -->
             <script>
             (function(){
-                var links = document.querySelectorAll('a.youtube-link');
-                var overlay = document.querySelector('.poptrox-overlay');
-                if(!links.length || !overlay) return;
-                var popup = overlay.querySelector('.poptrox-popup');
-                var pic = popup.querySelector('.pic');
-                var closer = popup.querySelector('.closer');
+                // Run when DOM is ready so overlay element (which is placed after scripts) exists
+                document.addEventListener('DOMContentLoaded', function(){
+                    function qs(sel, ctx){ return (ctx||document).querySelector(sel); }
+                    function qsa(sel, ctx){ return Array.prototype.slice.call((ctx||document).querySelectorAll(sel)); }
 
-                function openVideo(id){
-                    if(!id) return;
-                    pic.innerHTML = '<iframe width="100%" height="480" src="https://www.youtube.com/embed/' + id + '?rel=0&autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
-                    popup.style.display = 'block';
-                    closer.style.display = 'block';
-                    overlay.style.display = 'block';
-                }
+                    var overlay = qs('.poptrox-overlay');
+                    var popup = overlay && qs('.poptrox-popup', overlay);
+                    var pic = popup && qs('.pic', popup);
+                    var caption = popup && qs('.caption', popup);
+                    var closer = popup && qs('.closer', popup);
+                    if(!overlay || !popup || !pic) return;
 
-                function closeVideo(){
-                    overlay.style.display = 'none';
-                    popup.style.display = 'none';
-                    closer.style.display = 'none';
-                    pic.innerHTML = '';
-                }
+                    function openOverlay(){ overlay.style.display = 'block'; popup.style.display = 'block'; if(closer) closer.style.display = 'block'; }
+                    function closeOverlay(){ overlay.style.display = 'none'; popup.style.display = 'none'; if(closer) closer.style.display = 'none'; if(pic) pic.innerHTML = ''; if(caption) caption.style.display='none'; caption && (caption.innerHTML=''); }
 
-                links.forEach(function(a){
-                    a.addEventListener('click', function(e){
-                        e.preventDefault();
-                        var id = this.getAttribute('data-youtube') || (function(){
-                            var m = this.href.match(/[?&]v=([^&#]+)/); return m?m[1]:null;
-                        }).call(this);
-                        openVideo(id);
+                    // Click on gallery image: show image in overlay
+                    qsa('.gallery a').forEach(function(a){
+                        a.addEventListener('click', function(e){
+                            e.preventDefault();
+                            var href = a.getAttribute('href') || a.href;
+                            if(!href) return;
+                            // create img
+                            var img = document.createElement('img');
+                            img.src = href;
+                            img.alt = a.getAttribute('data-caption') || a.title || a.querySelector('img') && a.querySelector('img').alt || '';
+                            img.style.maxWidth = '92vw';
+                            img.style.maxHeight = '78vh';
+                            img.style.display = 'block';
+                            img.style.margin = '0 auto';
+                            pic.innerHTML = '';
+                            pic.appendChild(img);
+                            // caption
+                            if(caption){ caption.style.display='block'; caption.innerHTML = a.getAttribute('data-caption') || img.alt || ''; }
+                            openOverlay();
+                        });
                     });
-                });
 
-                overlay.addEventListener('click', function(e){ if(e.target === overlay) closeVideo(); });
-                closer.addEventListener('click', closeVideo);
-            })();
-            </script>
-
-            <!-- YouTube-in-modal handler: uses existing poptrox overlay in the page -->
-            <script>
-            (function(){
-                var links = document.querySelectorAll('a.youtube-link');
-                var overlay = document.querySelector('.poptrox-overlay');
-                if(!links.length || !overlay) return;
-                var popup = overlay.querySelector('.poptrox-popup');
-                var pic = popup.querySelector('.pic');
-                var closer = popup.querySelector('.closer');
-
-                function idFromUrl(url){
-                    var m = url.match(/[?&]v=([^&#]+)/);
-                    return m ? m[1] : null;
-                }
-
-                function openVideo(id){
-                    if(!id) return;
-                    pic.innerHTML = '<iframe width="100%" height="480" src="https://www.youtube.com/embed/' + id + '?rel=0&autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
-                    popup.style.display = 'block';
-                    closer.style.display = 'block';
-                    overlay.style.display = 'block';
-                }
-
-                function closeVideo(){
-                    overlay.style.display = 'none';
-                    popup.style.display = 'none';
-                    closer.style.display = 'none';
-                    pic.innerHTML = '';
-                }
-
-                links.forEach(function(a){
-                    a.addEventListener('click', function(e){
-                        e.preventDefault();
-                        var id = this.getAttribute('data-youtube') || idFromUrl(this.href);
-                        openVideo(id);
+                    // Video links: data-youtube or class youtube-link
+                    qsa('a.youtube-link, a[data-youtube]').forEach(function(a){
+                        a.addEventListener('click', function(e){
+                            e.preventDefault();
+                            var id = a.getAttribute('data-youtube') || (function(h){ var m = h.match(/[?&]v=([^&#]+)/); return m?m[1]:null; })(a.href || a.getAttribute('href') || '');
+                            if(!id){ window.open(a.href || a.getAttribute('href'), '_blank'); return; }
+                            var iframe = document.createElement('iframe');
+                            iframe.src = 'https://www.youtube.com/embed/' + id + '?rel=0&autoplay=1';
+                            iframe.width = '100%';
+                            iframe.height = Math.round(Math.min(640, window.innerHeight * 0.75));
+                            iframe.frameBorder = 0;
+                            iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+                            iframe.allowFullscreen = true;
+                            pic.innerHTML = '';
+                            pic.appendChild(iframe);
+                            if(caption){ caption.style.display='block'; caption.innerHTML = a.getAttribute('data-caption') || a.title || ''; }
+                            openOverlay();
+                        });
                     });
-                });
 
-                // Close when clicking backdrop or closer
-                overlay.addEventListener('click', function(e){
-                    if(e.target === overlay) closeVideo();
+                    // Close handlers: close when clicking outside the popup (backdrop or any element that is not inside the popup)
+                    overlay.addEventListener('click', function(e){
+                        try {
+                            if (!popup.contains(e.target)) closeOverlay();
+                        } catch (err) {
+                            // fallback: if popup not found, close when overlay itself was clicked
+                            if (e.target === overlay) closeOverlay();
+                        }
+                    });
+                    closer && closer.addEventListener('click', closeOverlay);
+
+                    // Keyboard: Esc to close
+                    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeOverlay(); });
                 });
-                closer.addEventListener('click', closeVideo);
             })();
             </script>
 
