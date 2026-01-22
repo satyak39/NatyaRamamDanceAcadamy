@@ -1806,7 +1806,9 @@
         background: -o-linear-gradient(#b30707b9, #ffff30);
         background: -moz-linear-gradient(#b30707b9, #ffff30);
         background: linear-gradient(#b30707b9, #ffff30);
-        /*background: linear-gradient(#FF5930, #406916); -- original color */
+        /*
+        background: -webkit-linear-gradient(#b30707b9, #ffff30);- first changes SK 
+        background: linear-gradient(#FF5930, #406916); -- original color */
     }
 
         #header .top {
