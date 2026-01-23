@@ -13,6 +13,9 @@
         <!-- <link rel="stylesheet" href="./Natya Ramam School of Dance_files/assets/css/font-awesome.min.css">   -->
         <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
         <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+
+        <script src="https://code.jquery.com" integrity="sha256-PC0A45BCfD65qXJ0vgcL5r7h2WlQ5Lg8z6RSC4qQ+E8=" crossorigin="anonymous"></script>
+        
     </head>
     <body class="" data-new-gr-c-s-check-loaded="14.1234.0" data-gr-ext-installed="">
 
@@ -99,8 +102,6 @@
                         </ul>
 
                 </div> -->
-
-
                 
             </div>
 
@@ -288,7 +289,7 @@
                                 <h2>Photo Gallery</h2>
                             </header>
                             <!--<p There is a placeholder here  </p> -->
-                            <div class="row gallery">
+                            <div ID="gallery" class="row gallery">
                                 <!-- Organized gallery (only uncommented items) -->
                                 <!-- C-series -->
                                 <!-- <article class="item"><a href="./Natya Ramam School of Dance_files/imagesPY/C3.jpeg" class="image fit from-left" data-caption="Rehearsal - C3" title="C3"><img src="./Natya Ramam School of Dance_files/imagesPY/C3.jpeg" alt="Rehearsal - C3"><span class="gallery-caption">Rehearsal</span></a></article> -->
@@ -315,6 +316,22 @@
                                 <article class="item"><a href="./Natya Ramam School of Dance_files/imagesPY/H4.jpeg" class="image fit from-left" data-caption="Student recital - H4" title="H4"><img src="./Natya Ramam School of Dance_files/imagesPY/H4.jpeg" alt="Student recital - H4"><span class="gallery-caption">Student recital</span></a></article>
                                 <article class="item"><a href="./Natya Ramam School of Dance_files/imagesPY/H5.jpeg" class="image fit from-left" data-caption="H5" title="H5"><img src="./Natya Ramam School of Dance_files/imagesPY/H5.jpeg" alt="H5"><span class="gallery-caption">Costume</span></a></article>
                             </div>
+                           
+                           <!--  
+                            $(document).ready(function() {
+                            $('#gallery').poptrox({
+                            // 'selector' targets the links within the container (defaults to 'a')
+                            // 'caption' can use 'title' attribute or be customized
+                            // 'fx' for transition effects (e.g., 'fade', 'slide')
+                            // 'overlayColor', 'overlayOpacity', etc. for styling
+                            selector: 'a', // Selects the anchor tags
+                            // caption: 'title', // Use the image's title attribute for captions (default)
+                            // overlayColor: '#000',
+                            // overlayOpacity: 0.8,
+                            // fx: 'fade'
+                            });
+                            });
+                        -->
 
                             <!-- init poptrox lightbox for this gallery (requires jquery.poptrox already loaded) -->
                             <script>
@@ -331,9 +348,12 @@
                                 });
                             })(jQuery);
                             </script>
+
                         </div>
                     </section>
                     
+
+
                 <!-- Video Gallery (separate section) -->
                     <section id="videos" class="five">
                         <div class="container">
@@ -405,16 +425,26 @@
 
             </div>
 
-        <!-- Scripts -->
+        <!-- Scripts  Latest version (e.g., 4.0.0, minified):-->
+        <script src="https://code.jquery.com" integrity="sha256-PC0A45BCfD65qXJ0vgcL5r7h2WlQ5Lg8z6RSC4qQ+E8=" crossorigin="anonymous"></script>
+         
+        <!-- Scripts  Latest 3.x version (e.g., 3.7.1, minified):
+            <script src="https://code.jquery.com" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script> 
+        <script src="https://ajax.googleapis.com"></script>
+        -->
+        <!-- 
             <script src="./Natya Ramam School of Dance_files/jquery.min.js.download"></script>
             <script src="./Natya Ramam School of Dance_files/jquery.scrolly.min.js.download"></script>
             <script src="./Natya Ramam School of Dance_files/jquery.scrollzer.min.js.download"></script>
             <script src="./Natya Ramam School of Dance_files/jquery.poptrox.min.js.download"></script>
             <script src="./Natya Ramam School of Dance_files/skel.min.js.download"></script>
             <script src="./Natya Ramam School of Dance_files/util.js.download"></script>
-            <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
             <script src="./Natya Ramam School of Dance_files/main.js.download"></script>
+        -->
+            <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
             <!-- small script to ensure clicked nav item becomes active and to sync on scroll -->
+        
+
             <script>
             (function(){
                 var links = document.querySelectorAll('#nav a[href^="#"]');
