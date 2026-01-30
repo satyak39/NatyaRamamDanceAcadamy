@@ -2205,8 +2205,22 @@ section.one { overflow: visible; }
 }
 
 /* Poptrox */
+/* Popup overrides to ensure clicked image/video is visible and centered */
+/* .poptrox-overlay { display: block !important; }*/
+/* Ensure overlay backdrop covers full viewport */
+.poptrox-overlay {
+    position: fixed !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: rgba(31,35,40,0.75) !important;
+    z-index: 9998 !important;
+    display: none; /* toggled by JS when opening */ 
+}
+ /* keep overlay visible when triggered */
 
-    .poptrox-popup {
+   .poptrox-popup {
         -moz-box-sizing: content-box;
         -webkit-box-sizing: content-box;
         -ms-box-sizing: content-box;
@@ -2215,6 +2229,27 @@ section.one { overflow: visible; }
         padding-bottom: 3em;
         box-shadow: 0 0.1em 0.15em 0 rgba(0, 0, 0, 0.15);
     }
+    
+    /* override inline/author styles */
+    /*
+    .poptrox-popup {
+    display: block !important;
+    vertical-align: middle !important;
+    position: fixed !important;
+    z-index: 9999 !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    min-width: 300px !important;
+    min-height: 150px !important;
+    max-width: 96vw !important;
+    max-height: 92vh !important;
+    box-sizing: border-box !important;
+    padding: 0 !important;
+    cursor: auto !important;
+    background: transparent !important;
+}
+    */
 
         .poptrox-popup .loader {
             position: absolute;
@@ -2251,6 +2286,7 @@ section.one { overflow: visible; }
                 width: 2em;
             }
 
+        /*
         .poptrox-popup .caption {
             position: absolute;
             bottom: 0;
@@ -2265,6 +2301,18 @@ section.one { overflow: visible; }
             font-size: 0.9em;
             color: rgba(0, 0, 5, 0.78);
         }
+        */
+        /* Caption area visible below content */
+.poptrox-popup .caption {
+    display: block !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    padding: 0.6rem 0.9rem !important;
+    background: #fff !important;
+    color: rgba(0,0,0,0.85) !important;
+    text-align: center !important;
+    font-size: 0.95rem !important;
+}
 
         .poptrox-popup .nav-next,
         .poptrox-popup .nav-previous {
@@ -2328,6 +2376,7 @@ section.one { overflow: visible; }
                 left: 0;
             }
 
+        /*
         .poptrox-popup .closer {
             -moz-transition: opacity 0.2s ease-in-out;
             -webkit-transition: opacity 0.2s ease-in-out;
@@ -2343,6 +2392,25 @@ section.one { overflow: visible; }
             opacity: 0;
             -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
         }
+        */
+        /* Closer button visible and accessible */
+.poptrox-popup .closer {
+    display: block !important;
+    cursor: pointer !important;
+    position: absolute !important;
+    right: 0.5rem !important;
+    top: 0.5rem !important;
+    z-index: 10001 !important;
+    width: 2.25rem !important;
+    height: 2.25rem !important;
+    line-height: 2.25rem !important;
+    text-align: center !important;
+    font-size: 1.25rem !important;
+    color: #222 !important;
+    background: rgba(255,255,255,0.85) !important;
+    border-radius: 50% !important;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2) !important;
+}
 
             .poptrox-popup .closer:before {
                 content: '';
@@ -2544,11 +2612,156 @@ h3 { font-size: clamp(1.05rem, 1.4vw, 1.3rem); }
      .row.gallery .item { width: 100%; }
      .row.gallery .item img { height: 220px; }
  }
- /* ensure poptrox popup content uses full width on mobile */
+
+ /* Small screens: adjust popup sizing */
+@media (max-width: 640px) {
+    .poptrox-popup { left: 50% !important; top: 50% !important; transform: translate(-50%,-50%) !important; width: 94vw !important; }
+    .poptrox-popup .pic, .poptrox-popup .pic iframe { height: 60vh !important; }
+}
+ /* ensure poptrox popup content uses full width on mobile 
  .poptrox-popup .pic { max-width: 92vw; max-height: 78vh; }
 
-/* ensure iframe videos in poptrox are responsive and don't break layout */
-.poptrox-popup .pic { display: block; padding: 0.5rem; box-sizing: border-box; }
+ ensure iframe videos in poptrox are responsive and don't break layout 
+
+.poptrox-popup .pic {  padding: 0.5rem; box-sizing: border-box; width: 300px;height: 400px; position: absolute; }
 .poptrox-popup .pic iframe { width: 100%; height: 60vh; max-width: 1000px; border: 0; display: block; }
 .poptrox-popup .caption { display: block; }
 
+/* Popup overrides to ensure clicked image/video is visible and centered */
+.poptrox-overlay { 
+    position: fixed !important; 
+    left: 0 !important; 
+    top: 0 !important; 
+    width: 100% !important; 
+    height: 100% !important; 
+    background: rgba(31,35,40,0.75) !important; 
+    z-index: 9998 !important; 
+    display: none; /* toggled by JS */
+}
+.poptrox-popup {
+    display: block !important;
+    vertical-align: middle !important;
+    position: fixed !important;
+    z-index: 9999 !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    min-width: 300px !important;
+    min-height: 150px !important;
+    max-width: 96vw !important;
+    max-height: 92vh !important;
+    box-sizing: border-box !important;
+    padding: 0 !important;
+    cursor: auto !important;
+    background: transparent !important;
+}
+
+.poptrox-popup .pic {
+    display: block !important;
+    position: relative !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: calc(80vh - 3.5rem) !important;
+    margin: 0 auto !important;
+    padding: 0.25rem !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+    background: #fff !important;
+    overflow: hidden !important;
+}
+
+.poptrox-popup .pic img {
+    display: block !important;
+    width: auto !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    object-fit: contain !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+}
+
+.poptrox-popup .pic iframe {
+    width: 100% !important;
+    height: calc(80vh - 3.5rem) !important;
+    border: 0 !important;
+    display: block !important;
+}
+
+.poptrox-popup .caption {
+    display: block !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    padding: 0.6rem 0.9rem !important;
+    background: #fff !important;
+    color: rgba(0,0,0,0.85) !important;
+    text-align: center !important;
+    font-size: 0.95rem !important;
+}
+
+.poptrox-popup .closer {
+    display: block !important;
+    cursor: pointer !important;
+    position: absolute !important;
+    right: 0.5rem !important;
+    top: 0.5rem !important;
+    z-index: 10001 !important;
+    width: 2.25rem !important;
+    height: 2.25rem !important;
+    line-height: 2.25rem !important;
+    text-align: center !important;
+    font-size: 1.25rem !important;
+    color: #222 !important;
+    background: rgba(255,255,255,0.85) !important;
+    border-radius: 50% !important;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2) !important;
+}
+
+@media (max-width: 640px) {
+    .poptrox-popup { left: 50% !important; top: 50% !important; transform: translate(-50%,-50%) !important; width: 94vw !important; }
+    .poptrox-popup .pic, .poptrox-popup .pic iframe { height: 60vh !important; }
+}
+*/
+
+/* .pic holds the image/iframe — make it responsive and properly sized */
+.poptrox-popup .pic {
+    display: block !important;
+    position: relative !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: calc(80vh - 3.5rem) !important; /* leave room for caption/closer */
+    margin: 0 auto !important;
+    padding: 0.25rem !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+    background: #fff !important;
+    overflow: hidden !important;
+}
+
+/* Image inside .pic: keep aspect ratio and fit inside the popup */
+.poptrox-popup .pic img {
+    display: block !important;
+    width: auto !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    object-fit: contain !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+}
+
+/* Responsive iframe for videos */
+.poptrox-popup .pic iframe {
+    width: 100% !important;
+    height: calc(80vh - 3.5rem) !important;
+    border: 0 !important;
+    display: block !important;
+}
+
+
+/* 
+.poptrox-popup .pic { max-width: 92vw; max-height: 78vh; }
+.poptrox-popup .pic { display: block; padding: 0.5rem; box-sizing: border-box; } 
+.poptrox-popup .pic iframe { width: 100%; height: 60vh; max-width: 1000px; border: 0; display: block; }
+.poptrox-popup .caption { display: block; }
+*/
