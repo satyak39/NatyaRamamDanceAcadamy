@@ -2594,6 +2594,7 @@ h3 { font-size: clamp(1.05rem, 1.4vw, 1.3rem); }
 * { -webkit-text-size-adjust: 100%; }
 
 /* Gallery improvements: spacing, hover zoom, caption overlay */
+/*
 .row.gallery { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
 .row.gallery .item { width: calc(33.333% - 1rem); min-width: 180px; box-sizing: border-box; }
 .row.gallery .item .image { position: relative; display: block; border-radius: 8px; overflow: hidden; }
@@ -2610,16 +2611,77 @@ h3 { font-size: clamp(1.05rem, 1.4vw, 1.3rem); }
      font-size: 0.95rem;
      text-align: left;
      opacity: 1;
- }
+ }*/
  /* make gallery single-column on narrow screens */
- @media (max-width: 960px) {
+ /*@media (max-width: 960px) {
      .row.gallery .item { width: calc(50% - 1rem); }
      .row.gallery .item img { height: 160px; }
  }
  @media (max-width: 480px) {
      .row.gallery .item { width: 100%; }
      .row.gallery .item img { height: 220px; }
- }
+ }*/
+/*  ############################# satishK changes -- fixed frame */
+
+/* Gallery: fixed framed tiles (append this block) */
+
+.row.gallery { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+
+.row.gallery .item {
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;               /* hide overflow so image fills frame */
+    border-radius: 8px;
+    background: #000;               /* fallback background while image loads */
+    width: calc(33.333% - 1rem);    /* three columns on wide screens */
+    min-width: 160px;
+    aspect-ratio: 4 / 3;            /* fixed frame for uniform look */
+    display: block;
+}
+
+/* Ensure the anchor/image fills the frame and preserves cropping */
+.row.gallery .item .image,
+.row.gallery .item .image img {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* Cover the frame while preserving aspect (centers important area) */
+.row.gallery .item .image img {
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.35s ease;
+}
+
+/* subtle hover zoom */
+.row.gallery .item:hover .image img {
+    transform: scale(1.04);
+}
+
+/* caption overlay */
+.row.gallery .item .gallery-caption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: .5rem .75rem;
+    background: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0));
+    color: #fff;
+    font-size: 0.95rem;
+    text-align: left;
+    pointer-events: none;
+}
+
+/* Responsive: two columns on medium, single on small */
+@media (max-width: 960px) {
+    .row.gallery .item { width: calc(50% - 1rem); aspect-ratio: 4 / 3; }
+}
+@media (max-width: 480px) {
+    .row.gallery .item { width: 100%; aspect-ratio: 16 / 9; }
+}
+
+/*  ############################# satishK changes -- fixed frame */
 
  /* Small screens: adjust popup sizing */
 @media (max-width: 640px) {
