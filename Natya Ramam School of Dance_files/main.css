@@ -2637,6 +2637,7 @@ h3 { font-size: clamp(1.05rem, 1.4vw, 1.3rem); }
     min-width: 160px;
     aspect-ratio: 4 / 3;            /* fixed frame for uniform look */
     display: block;
+    margin: 2px;
 }
 
 /* Ensure the anchor/image fills the frame and preserves cropping */
@@ -2843,3 +2844,34 @@ h3 { font-size: clamp(1.05rem, 1.4vw, 1.3rem); }
 .poptrox-popup .pic iframe { width: 100%; height: 60vh; max-width: 1000px; border: 0; display: block; }
 .poptrox-popup .caption { display: block; }
 */
+
+/* Gallery carousel nav (visible arrows) */
+.gc-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.25rem;
+    height: 3.25rem;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.9);
+    color: #222;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    border: none;
+    cursor: pointer;
+    z-index: 10002;
+    padding: 0.25rem;
+}
+.gc-nav:focus { outline: 2px solid rgba(0,0,0,0.12); }
+.gc-prev { left: 0.75rem; }
+.gc-next { right: 0.75rem; }
+.gc-nav svg { display: block; width: 22px; height: 22px; }
+
+/* Small screens: make nav slightly smaller */
+@media (max-width: 640px) {
+    .gc-nav { width: 2.5rem; height: 2.5rem; }
+    .gc-prev { left: 0.5rem; }
+    .gc-next { right: 0.5rem; }
+}

@@ -510,99 +510,10 @@
             })();
             </script>
 
-            <!-- unified lightbox (vanilla JS): images and YouTube videos open inside existing poptrox overlay -->
-            <script>
-            (function(){
-                // initialize lightbox when DOM is ready (works even if DOMContentLoaded already fired)
-                function initLightbox(){
-                    console.log('initLightbox: starting');
-                    function qs(sel, ctx){ return (ctx||document).querySelector(sel); }
-                    function qsa(sel, ctx){ return Array.prototype.slice.call((ctx||document).querySelectorAll(sel)); }
+            <!-- unified lightbox (loaded from external JS) -->
+            <script src="./Natya Ramam School of Dance_files/js/gallery-carousel.js"></script>
 
-                    var overlay = qs('.poptrox-overlay');
-                    var popup = overlay && qs('.poptrox-popup', overlay);
-                    var pic = popup && qs('.pic', popup);
-                    var caption = popup && qs('.caption', popup);
-                    var closer = popup && qs('.closer', popup);
-                    if(!overlay || !popup || !pic) return;
-
-                    function openOverlay(){ overlay.style.display = 'block'; popup.style.display = 'block'; if(closer) closer.style.display = 'block'; }
-                    function closeOverlay(){ overlay.style.display = 'none'; popup.style.display = 'none'; if(closer) closer.style.display = 'none'; if(pic) { pic.innerHTML = ''; pic.style.display = 'none'; } if(caption){ caption.style.display='none'; caption.innerHTML=''; } }
-
-                    // use explicit hook 'js-lightbox' to avoid conflicts
-                    var anchors = qsa('#gallery a.js-lightbox');
-                    console.log('initLightbox: found anchors', anchors.length);
-                    anchors.forEach(function(a){
-                        a.addEventListener('click', function(e){
-                            console.log('lightbox: click on', a.getAttribute('href'));
-                            e.preventDefault();
-                            e.stopPropagation();
-                            var href = a.getAttribute('href') || a.href;
-                            if(!href) return;
-                            var type = a.getAttribute('data-type') || 'image';
-                            if(type === 'image'){
-                                var img = document.createElement('img');
-                                img.src = href;
-                                img.alt = a.getAttribute('data-caption') || a.title || (a.querySelector('img') && a.querySelector('img').alt) || '';
-                                img.style.maxWidth = '92vw';
-                                img.style.maxHeight = '78vh';
-                                img.style.display = 'block';
-                                img.style.margin = '0 auto';
-                                pic.innerHTML = '';
-                                pic.appendChild(img);
-                                pic.style.display = 'block';
-                                if(caption){ caption.style.display='block'; caption.innerHTML = a.getAttribute('data-caption') || img.alt || ''; }
-                                console.log('lightbox: opening overlay for', href);
-                                openOverlay();
-                            } else {
-                                // fallback: open external link
-                                window.open(href, '_blank');
-                            }
-                        });
-                    });
-
-                    // youtube links: mark anchors with class 'youtube-link' or data-youtube
-                    qsa('a.youtube-link, a[data-youtube]').forEach(function(a){
-                        a.addEventListener('click', function(e){
-                            e.preventDefault();
-                            e.stopPropagation();
-                            var id = a.getAttribute('data-youtube') || (function(h){ var m = h.match(/[?&]v=([^&#]+)/); return m?m[1]:null; })(a.href || a.getAttribute('href') || '');
-                            if(!id){ window.open(a.href || a.getAttribute('href'), '_blank'); return; }
-                            var iframe = document.createElement('iframe');
-                            iframe.src = 'https://www.youtube.com/embed/' + id + '?rel=0&autoplay=1';
-                            iframe.width = '100%';
-                            iframe.height = Math.round(Math.min(720, window.innerHeight * 0.75));
-                            iframe.frameBorder = 0;
-                            iframe.setAttribute('allow','accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
-                            iframe.setAttribute('allowfullscreen','');
-                            pic.innerHTML = '';
-                            pic.appendChild(iframe);
-                            pic.style.display = 'block';
-                            if(caption){ caption.style.display='block'; caption.innerHTML = a.getAttribute('data-caption') || a.title || ''; }
-                            openOverlay();
-                        });
-                    });
-
-                    // Close handlers - close when clicking outside the popup
-                    overlay.addEventListener('click', function(e){
-                        try {
-                            if (!popup.contains(e.target)) closeOverlay();
-                        } catch(err) {
-                            if (e.target === overlay) closeOverlay();
-                        }
-                    });
-                    closer && closer.addEventListener('click', function(e){ e.stopPropagation(); closeOverlay(); });
-
-                    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeOverlay(); });
-                }
-
-                if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initLightbox); else initLightbox();
-            })();
-            </script>
-
-    
-
-<div id="headerToggle"><a href="#header" class="toggle"></a></div><div class="poptrox-overlay" style="position: fixed; left: 0px; top: 0px; z-index: 10001; width: 100%; height: 100%; text-align: center; cursor: pointer; display: none;"><div style="display:inline-block;height:100%;vertical-align:middle;"></div><div style="position:absolute;left:0;top:0;width:100%;height:100%;background:#1f2328;opacity:0.65;filter:alpha(opacity=65);"></div><div class="poptrox-popup" style="display: none; vertical-align: middle; position: relative; z-index: 1; cursor: auto; min-width: 200px; min-height: 100px;"><div class="loader" style="display: none;"></div><div class="pic" style="display: none;"></div><div class="caption" style="display: none;"></div><span class="closer" style="cursor: pointer; display: none;">×</span><div class="nav-previous" style="display: none;"></div><div class="nav-next" style="display: none;"></div></div></div></body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
+            <div id="headerToggle"><a href="#header" class="toggle"></a></div><div class="poptrox-overlay" style="position: fixed; left: 0px; top: 0px; z-index: 10001; width: 100%; height: 100%; text-align: center; cursor: pointer; display: none;"><div style="display:inline-block;height:100%;vertical-align:middle;"></div><div style="position:absolute;left:0;top:0;width:100%;height:100%;background:#1f2328;opacity:0.65;filter:alpha(opacity=65);"></div><div class="poptrox-popup" style="display: none; vertical-align: middle; position: relative; z-index: 1; cursor: auto; min-width: 200px; min-height: 100px;"><div class="loader" style="display: none;"></div><div class="pic" style="display: none;"></div><div class="caption" style="display: none;"></div><span class="closer" style="cursor: pointer; display: none;">×</span><div class="nav-previous" style="display: none;"></div><div class="nav-next" style="display: none;"></div></div></div></body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
       div.grammarly-desktop-integration {
         position: absolute;
         width: 1px;
