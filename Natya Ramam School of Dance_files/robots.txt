@@ -1,0 +1,3 @@
+// filepath: Natya Ramam School of Dance_files/robots.txt
+User-agent: *
+Allow: /
