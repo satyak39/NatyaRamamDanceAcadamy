@@ -1,4 +1,4 @@
 // filepath: Natya Ramam School of Dance_files/robots.txt
 User-agent: *
 Allow: /
-Sitemap: https://satyak39.github.io/sitemap.xml
+Sitemap: https://satyak39.github.io/NatyaRamamDanceAcadamy/sitemap.xml
