@@ -8,7 +8,7 @@ while ($listener.IsListening) {
   $context = $listener.GetContext()
   $req = $context.Request
   $path = $req.Url.LocalPath.TrimStart('/')
-  if ($path -eq '') { $path = 'Natya Ramam School of Dance.html' }  # default file
+  if ($path -eq '') { $path = 'index.html' }  # default file
   $file = Join-Path $PWD $path
   if (Test-Path $file) {
     $ext = [IO.Path]::GetExtension($file).ToLower()
